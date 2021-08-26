@@ -38,43 +38,20 @@ var move = move_right - move_left;
 
 hsp = move * drivesp;
 
-/*Horizontal Collision
-if (place_meeting(x+hsp,y,oWall))
-{
-    while (!place_meeting(x+sign(hsp),y,oWall))
-    {
-        x = x + sign(hsp);
-    }
-    hsp = 0;
-}*/
 x = x + hsp;
 
-/*Vertical Collision
-if (place_meeting(x,y+vsp,oWall))
-{
-    while (!place_meeting(x,y+sign(vsp),oWall))
-    {
-        y = y + sign(vsp);
-    }
-    vsp = 0;
-}*/
-
 if (move_up && lane != 2) {
-	y = y - vertical_height;
+	is_moving_up = true;
+	yGoal = y - vertical_height;
 	lane = lane + 1;
 } else if (move_down && lane != 0) {
-	y = y + vertical_height;
+	is_moving_down = true;
+	yGoal = y + vertical_height;
 	lane = lane - 1;
 }
 
-
-y = y + vsp;
-
-/*
-vertical movement functionality:
-
-if vertical button is pressed,
-move to goal destination
-
-if it is at goal destination already, do not allow it to move any further
-*/
+if(is_moving_up && y > yGoal){
+	y = y - 20;
+} else if(is_moving_down && y < yGoal){
+	y = y + 20;
+}
