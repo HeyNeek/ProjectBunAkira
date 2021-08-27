@@ -51,7 +51,19 @@ if (move_up && lane != 2) {
 }
 
 if(is_moving_up && y > yGoal){
-	y = y - 20;
+	yCalc =  y - (vertical_speed * (delta_time/1000000));
+	if (yCalc < yGoal) {
+		y = yGoal;
+	} else {
+			y = yCalc;
+	}
+
 } else if(is_moving_down && y < yGoal){
-	y = y + 20;
+	yCalc = y + (vertical_speed * (delta_time/1000000));
+	if (yCalc > yGoal) {
+		y = yGoal;
+	} else {
+			y = yCalc;
+	}
+
 }
